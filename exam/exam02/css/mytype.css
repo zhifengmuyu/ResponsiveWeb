@@ -1,0 +1,28 @@
+.cv_title{
+	color: blue;
+	font-weight: bold;
+	text-align: center;
+}
+
+.cv_subitem{
+	color: green;
+	overflow: hidden;
+	/*white-space: pre;*/
+	max-height: 50px;
+	height: 50px;
+
+}
+
+.cv_subitem:hover{
+	color: green;
+	overflow: hidden;
+	font-weight: bold;
+	/*white-space: pre;*/
+	max-height: 50px;
+	height: 50px;
+
+}
+
+.mainViewer{
+	color: black;
+}
