@@ -1,11 +1,15 @@
+.center{
+	text-align:center;
+}
+
 .cv_title{
-	color: blue;
+	color: black;
 	font-weight: bold;
 	text-align: center;
 }
 
 .cv_subitem{
-	color: green;
+	color: black;
 	overflow: hidden;
 	/*white-space: pre;*/
 	max-height: 50px;
