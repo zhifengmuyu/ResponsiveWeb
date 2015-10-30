@@ -8,11 +8,19 @@
 	<body>
 	<nav class="navbar navbar-default">
 	   <div class="container-fluid"><!--//start container-fluid -->
+			<div class="navbar-header"> <!--uncollapse end-->
+				<button type="button" class="navbar-toggle collapsed btn btn-default" 
+				data-toggle="collapse" data-target="#project_nav" 
+				aria-expanded="false">Navigation</button>
+			</div><!--collapse end-->
+	   
+			<div class="collapse navbar-collapse" id="project_nav">
 			<ul class = "nav navbar-nav">
 				<li class = "active"><a href="./landing.html">Landing page</a></li>
 				<li><a href="./taskdetail.html">Task Details</a></li>
 				<li><a href="./about.html">About</a></li>
 			</ul>
+			</div>
 	   </div><!--//end container-fluid -->
 	<nav>
 	<br><br>
@@ -21,24 +29,32 @@
 		<ul class="breadcrumb">
 			<li ><a href="./landing.html">Landing page</a></li>
 		</ul>
-		</div>
 		<div class="row">
-			<div class="col-md-3">
-
+			<div class="col-md-6 col-xs-12 col-lg-2">
+					<h6><a href="./taskdetail.html" class="task_name">Requirement</a></h6>
 			</div>
-			<div class="col-md-6">
-					<ol data-class="list-group-scrollable" id="cv_list">
-					<li class="list-group-item cv_subitem" id="item00"><a href="./taskdetail.html">Requirement</a></li>
-					<li class="list-group-item cv_subitem" id="item01"><a href="./taskdetail.html">Design	</a></li>
-					<li class="list-group-item cv_subitem" id="item02"><a href="./taskdetail.html">Implementation</a></li>
-					<li class="list-group-item cv_subitem" id="item03"><a href="./taskdetail.html">Test</a></li>
-					<li class="list-group-item cv_subitem" id="item04"><a href="./taskdetail.html">Release</a></li>
-					<li class="list-group-item cv_subitem" id="item05"><a href="./taskdetail.html">Hobbie</a></li>
-					<li class="list-group-item cv_subitem" id="item06"><a href="./about.html">About this project</a></li>
-
-				</div>
+			<div class="col-md-6 col-xs-12 col-lg-2">
+					<h6><a href="./taskdetail.html" class="task_name">Design	</a></h6>
+			</div>
+			<div class="col-md-6 col-xs-12 col-lg-2">
+					<h6><a href="./taskdetail.html" class="task_name">Implementation</a></h6>
+			</div>
+			<div class="col-md-6 col-xs-12 col-lg-2">
+					<h6><a href="./taskdetail.html" class="task_name">Test</a></h6>
+			</div>
+			<div class="col-md-6 col-xs-12 col-lg-2">
+					<h6><a href="./taskdetail.html" class="task_name">Release</a></h6>
+			</div>
+			<div class="col-md-6 col-xs-12 col-lg-2">
+					<h6><a href="./taskdetail.html" class="task_name">Hobbie</a></h6>
+			</div>
+			<div class="col-md-6 col-xs-12 col-lg-2">
+					<h6><a href="./about.html" class="task_name">About this Website</a></h6>
 			</div>
 		</div>
+	</div>
+		<script type="text/javascript" src="./js/jquery-1.11.3.min.js">
+		</script>
 		<script type="text/javascript" src="./js/bootstrap.min.js">
 		</script>
 	</body>

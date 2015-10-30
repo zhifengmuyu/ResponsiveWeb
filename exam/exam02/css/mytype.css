@@ -1,3 +1,9 @@
+.task_name{
+	color:blue;
+	text-align:left;
+	font-size: 120%;
+}
+
 .center{
 	text-align:center;
 }
