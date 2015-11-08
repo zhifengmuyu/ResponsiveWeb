@@ -1,0 +1,3 @@
+todo:
+1. Design the layout and style of the whole site.
+2. input the style into css.
