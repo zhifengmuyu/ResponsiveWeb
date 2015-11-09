@@ -1,1 +1,28 @@
 /* put your css code here */
+.zoo_title{
+	font-family: "Times New Roman", Times, serif;
+	text-align:left;
+	background-color:#f8f8f8
+}
+
+.zoo_animal_header{
+	font-family: "Arial", Sans-serif;
+	text-align: center;
+}
+
+.zoo_class_detail{
+	font-style: italic;
+}
+
+div.zoo_row{
+/*	border: 2px solid;*/
+}
+
+div.zoo_cage{
+	background-color:#f8f8f8;
+    border: 2px dotted;
+}
+
+.zoo_class_image{
+  height:250px;
+}
