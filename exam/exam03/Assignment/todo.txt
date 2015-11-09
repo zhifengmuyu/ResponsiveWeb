@@ -1,5 +1,7 @@
 todo:
-  navbar is no good, considering use dynamic breadcrumb
-  pics not good for each animal class.
+1. add function to breadcrumbs to make it can navigate
+2. add an icon of Beijing zoo at the top to make the page more natural: http://www.beijingzoo.com/
+
+3. generation of navigation is still not very good.
 
 

@@ -26,40 +26,69 @@
 		<p class="lead"> The website present an animal classification and show the typical animal pics of each class.</p>
 		</div>
 		<hr>
+		<div id="content">		
+		</div>
+	</div>
+	<script id="animal_classification" type="text/x-handlerbars-template">
 		<div class="row">
-			<nav class = "navbar navbar-default">
-				<div class="content-fluid">
-					<ul class="nav navbar-nav">
-						<li><a href="#">Animal Classes</a></li>
-						<li><a href="#">Animals in each class</a></li>
-						<li><a href="#">Each Animal</a></li>
-					</ul>
-				</div>
-			</nav>
+			<ol  class="breadcrumb">
+				<li><a href="#">Animal</a></li>
+			</ol>	
 		</div>
 		<div class="row">
 			<h3 class="zoo_animal_header">Animal</h3>	
 		</div>
-		<div id="content"  class="row zoo_row">		
-		</div>
-	</div>
-	<script id="animal_classification" type="text/x-handlerbars-template">
+		<div class="row">
 			{{#each class}}
 			<div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 zoo_cage">
 				<h4 class="zoo_class_name"> {{name}} <small class="zoo_class_detail">There is totally {{animals.length}} in this class.</small></h4>
-				<img id = "{{@index}}" class="thumbnail zoo_class_image" src="{{animals.[0].image1}}"></img>
+				<img href="#" id = "{{@index}}" class="thumbnail zoo_class_image" src="{{animals.[0].image1}}"></img>
 			</div>
 			{{/each}}
+		</div>
 	</script> 
 	
 	<script id="class_of_animal" type="text/x-handlerbars-template">
-	<h4>{{name}}</h4>
+		<div class="row">
+			<ol  class="breadcrumb">
+				<li><a href="#">Animal</a></li>
+				<li><a href="#">{{name}}</a></li>
+			</ol>	
+		</div>
+
+		<div class="row">
+			<h3 class="zoo_animal_header">{{name}}</h3>	
+		</div>
+		<div class="row">
 			{{#each animals}}
 			<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 zoo_cage">
-				<h4 class="zoo_animal_name"> {{name}} <small class="zoo_animal_detail">{{description}}</small></h4>
-				<img class="thumbnail zoo_animal_image" src="{{image2}}"></img>
+				<h4 class="zoo_animal_name"> {{name}} <!--small class="zoo_animal_detail">{{description}}</small--></h4>
+				<img id = "{{@index}}" class="thumbnail zoo_animal_image" src="{{image1}}"></img>
 			</div>
 			{{/each}}
+		</div>
 	</script> 
+	
+	<script id="individual_animal" type="text/x-handlerbars-template">
+		<div class="row">
+			<ol  class="breadcrumb">
+				<li><a href="#">Animal</a></li>
+				<li><a id="animal_class" href="#"></a></li>
+				<li><a href="#">{{name}}</a></li>
+			</ol>	
+		</div>
+
+		<div class="row">
+			<h3 class="zoo_animal_header">{{name}}</h3>	
+		</div>
+		<div class="row">
+			<lead class="zoo_animal_name">{{description}}</lead>
+		<div>
+		<div class="row">
+			<img class="zoo_animal_image" src="{{image1}}"></img>
+			<img class="zoo_animal_image" src="{{image2}}"></img>
+		</div>
+	</script> 
+	
     <!-- put your HTML here -->
 </body>

@@ -26,3 +26,15 @@ div.zoo_cage{
 .zoo_class_image{
   height:250px;
 }
+
+.zoo_animal_image{
+  width:250px;
+}
+
+.zoo_class_image:hover{
+	cursor:pointer;
+}
+
+.zoo_animal_image:hover{
+	cursor:pointer;
+}
