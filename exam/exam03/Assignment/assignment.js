@@ -1,6 +1,6 @@
 // put your javascript code here
 var animal_template;
-$(document).ready(function(){
+function loadZooAnimals(){
 	//add breadcrumb
 	$(".breadcrumb").html("<li><a href='#'>Animal</a></li>")
 	
@@ -20,6 +20,9 @@ $(document).ready(function(){
 		var class_index = parseInt($(this).attr("id"))
 		$("#content").html(content);
 		
+		//breadcrumb
+		$("#animal_class").text(animals.class[class_index].name);
+		
 		//after second level of template instantiated, js added 
 		$(".zoo_animal_image").click(function(){
 			var source = $("#individual_animal").html();
@@ -27,13 +30,16 @@ $(document).ready(function(){
 
 			var content = animal_template(animals.class[class_index].animals[parseInt($(this).attr("id"))]);
 			$("#content").html(content);
-			
-			$("#animal_class").text(animals.class[class_index].name);
-		})
 		
+			//breadcrumb		
+			$("#animal_class").text(animals.class[class_index].name);
+			$("#animal_species").text(animals.class[class_index].animals[parseInt($(this).attr("id"))].name);
+
+		})
 		
 	})
 	
 	
 }
-);
+
+$(document).ready(loadZooAnimals);

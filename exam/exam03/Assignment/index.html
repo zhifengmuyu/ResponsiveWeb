@@ -32,7 +32,7 @@
 	<script id="animal_classification" type="text/x-handlerbars-template">
 		<div class="row">
 			<ol  class="breadcrumb">
-				<li><a href="#">Animal</a></li>
+				<li><a href="#" onclick="loadZooAnimals();">Animal</a></li>
 			</ol>	
 		</div>
 		<div class="row">
@@ -51,8 +51,8 @@
 	<script id="class_of_animal" type="text/x-handlerbars-template">
 		<div class="row">
 			<ol  class="breadcrumb">
-				<li><a href="#">Animal</a></li>
-				<li><a href="#">{{name}}</a></li>
+				<li><a href="#" onclick="loadZooAnimals();">Animal</a></li>
+				<li><a id="animal_class" href="#"></a></li>
 			</ol>	
 		</div>
 
@@ -72,9 +72,9 @@
 	<script id="individual_animal" type="text/x-handlerbars-template">
 		<div class="row">
 			<ol  class="breadcrumb">
-				<li><a href="#">Animal</a></li>
+				<li><a href="#" onclick="loadZooAnimals();">Animal</a></li>
 				<li><a id="animal_class" href="#"></a></li>
-				<li><a href="#">{{name}}</a></li>
+				<li><a id="animal_species" href="#"></a></li>
 			</ol>	
 		</div>
 
