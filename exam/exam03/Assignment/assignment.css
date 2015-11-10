@@ -23,6 +23,11 @@ div.zoo_cage{
     border: 2px dotted;
 }
 
+div.zoo_cage:hover{
+	background-color:#e0e0e0;
+}
+
+
 .zoo_class_image{
   height:250px;
 }

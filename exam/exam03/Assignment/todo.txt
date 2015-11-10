@@ -1,7 +1,5 @@
 todo:
-1. add function to breadcrumbs to make it can navigate
+1. simplify the code to make the use only one function only loadClassAnimal() only
 2. add an icon of Beijing zoo at the top to make the page more natural: http://www.beijingzoo.com/
-
-3. generation of navigation is still not very good.
 
 
