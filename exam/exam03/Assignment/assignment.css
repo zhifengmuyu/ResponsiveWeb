@@ -1,4 +1,7 @@
 /* put your css code here */
+.zoo_banner{
+	height:70px;
+}
 .zoo_title{
 	font-family: "Times New Roman", Times, serif;
 	text-align:left;
@@ -33,7 +36,7 @@ div.zoo_cage:hover{
 }
 
 .zoo_animal_image{
-  width:250px;
+  width:100%;
 }
 
 .zoo_class_image:hover{
