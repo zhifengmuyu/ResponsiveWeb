@@ -23,11 +23,32 @@ var digraph={
   }
 }
 
+function bfs(dgraph,  start)
+{
+	var queue=[];
+	queue.unshift(start);
+	marked[start]= true;
+	while(queue.length>0){
+		var vex = queue.pop();
+		console.log("vex=" +vex); //log
+		var adjarray=dgraph.adj(vex);
+		for(var i = 0; i < adjarray.length; i++)
+		{
+			var adjv = adjarray[i];
+			if(!marked[adjv]){
+				marked[adjv] = true;//mark vertex, first time get it.
+				queue.unshift(adjv);
+				edgeto[adjv] = vex;
+			}
+		}
+	}
+}
+
 //function DFS
 function dfs(dgraph,  index){
 	var adjarray=dgraph.adj(index);
+	marked[index]=true;	//mark vertex, first time get it.
 	console.log(index);
-	marked[index]=true;	
 	//console.log("l:" +adjarray.length);
 	for (var i = 0; i < adjarray.length; i++)
 	{
@@ -86,10 +107,11 @@ console.log("start");
 for(var v=0; v<digraph.total_v; v ++)
 	if(!marked[v])
 		dfs(digraph, v);
+		//bfs(digraph, 0);
 	
 console.log(edgeto);
 while(reversepostorder.length>0)
-	{ 
-	var data = reversepostorder.pop();
-	console.log(data);
-	}
+{ 
+ var data = reversepostorder.pop();
+console.log("schedule " + data);
+ }
