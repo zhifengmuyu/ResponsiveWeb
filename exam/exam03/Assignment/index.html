@@ -89,8 +89,32 @@
 			<lead class="zoo_animal_name">{{description}}</lead>
 		<div>
 		<div class="row">
-			<img class="zoo_animal_image" src="{{image1}}"></img>
-			<img class="zoo_animal_image" src="{{image2}}"></img>
+			<div class="col-md-6">
+				<div id="species_pics" class="carousel slide" data-ride="carousel">
+					<ul class="carousel-indicators">
+						<li data-target="#species_pics" data-slide-to="0" class="active"></li>
+						<li data-target="#species_pics" data-slide-to="1"></li>
+					</ul>
+					
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img class="zoo_animal_image" src="{{image1}}" alt="{{name}}1"></img>
+						</div>
+						<div class="item">
+							<img class="zoo_animal_image" src="{{image2}}" alt="{{name}}2"></img>
+						</div>
+					</div>
+					
+					<a class="left carousel-control" href="#species_pics" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#species_pics" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
 		</div>
 	</script> 
 	
