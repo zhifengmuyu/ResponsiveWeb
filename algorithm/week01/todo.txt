@@ -1,2 +1,2 @@
-2. use SAP in wordnet class
-3. optimize the wordnet class
+1. 增加错误处理 WordNet
+2. 测试更多文件读写

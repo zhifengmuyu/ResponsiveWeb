@@ -60,7 +60,7 @@ public class SAP {
     // length of shortest ancestral path between any vertex in v and any vertex in w, -1 means no such ancestor
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
         if(v == null || w == null) {
-            throw new java.lang.NullPointerException;
+            throw new java.lang.NullPointerException();
         }
         BreadthFirstDirectedPaths paths_v = new BreadthFirstDirectedPaths(DG, v);//shortest path from all vertex in set v
         BreadthFirstDirectedPaths paths_w = new BreadthFirstDirectedPaths(DG, w);//shortest path from all vertex in set w
@@ -78,7 +78,7 @@ public class SAP {
     // a common ancestor that participate in shortest anestral path; -1 means no ancestor
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
         if(v == null || w == null) {
-            throw new java.lang.NullPointerException;
+            throw new java.lang.NullPointerException();
         }
 
         BreadthFirstDirectedPaths paths_v = new BreadthFirstDirectedPaths(DG, v);//shortest path from all vertex in set v
