@@ -1,2 +1,2 @@
-1. read in synset files in wordnet class.
 2. use SAP in wordnet class
+3. optimize the wordnet class
