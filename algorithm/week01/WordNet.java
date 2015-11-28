@@ -20,6 +20,9 @@ private SAP sap;
    // constructor takes the name of the two input files 
 //?what if the sysset and the hypernyms not matched?
 public WordNet(String synsets, String hypernyms) { 
+    if(synsets==null || synsets=="" || hypernyms == null || hypernyms == "") {
+        throw new java.lang.NullPointerException();
+    }
     In in = new In(synsets); 
     String lines[] = in.readAllLines(); 
     
@@ -98,11 +101,17 @@ public WordNet(String synsets, String hypernyms) {
  
    // is the word a WordNet noun? 
     public boolean isNoun(String word) { 
+        if(word==null) {
+        throw new java.lang.NullPointerException();
+    }
         return bst.contains(word);
     } 
  
    // distance between nounA and nounB (defined below) , f
     public int distance(String nounA, String nounB) {
+        if(nounA==null || nounB == null) {
+            throw new java.lang.NullPointerException();
+        }
         Bag<Integer> a = bst.get(nounA);
         Bag<Integer> b = bst.get(nounB);
         return sap.length(a, b);
@@ -111,9 +120,14 @@ public WordNet(String synsets, String hypernyms) {
    // a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB 
    // in a shortest ancestral path (defined below) 
     public String sap(String nounA, String nounB) { 
+        if(nounA==null || nounB == null) {
+            throw new java.lang.NullPointerException();
+        }
+
         Bag<Integer> a = bst.get(nounA);
         Bag<Integer> b = bst.get(nounB);
-        return synsetTable[sap.ancestor(a, b)];
+        StdOut.println(a.size()+" " +b.size());
+        return sap.ancestor(a, b) == -1 ? "**Error no ancestor**" : synsetTable[sap.ancestor(a, b)];
     } 
  
    // do unit testing of this class 
@@ -127,11 +141,17 @@ public WordNet(String synsets, String hypernyms) {
     while (!StdIn.isEmpty()) {
         String v = StdIn.readString();
         String w = StdIn.readString();
-        if(wn.isNoun(v) && wn.isNoun(w)){
-            int length   = wn.distance(v, w);
-            String ancestor = wn.sap(v, w);
-            StdOut.printf("length = %d, ancestor = %s\n", length, ancestor);
+        if( !wn.isNoun(v)) {
+            StdOut.println("The word \"" + v +"\" is not an noun of current library! plz try again" );
+            continue;
         }
+        if( !wn.isNoun(w)) {
+            StdOut.println("The word \"" + w +"\" is not an noun of current library! plz try again" );
+            continue;
+        }
+        int length   = wn.distance(v, w);
+        String ancestor = wn.sap(v, w);
+        StdOut.printf("length = %d, ancestor = %s\n", length, ancestor);
     }
     } 
 }

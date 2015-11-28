@@ -1,2 +1,1 @@
-1. 增加错误处理 WordNet
-2. 测试更多文件读写
+1. Outcast class
