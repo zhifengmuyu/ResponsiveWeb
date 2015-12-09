@@ -1,14 +1,23 @@
 Websites = new Mongo.Collection("websites");
+Comments = new Mongo.Collection("comments");
 
 if (Meteor.isClient) {
 
+	Router.configure({
+		layoutTemplate: 'AppLayout'
+	});
+	
+	Router.route('/',function(){
+		this.render('navigator', {to: 'nav'});
+		this.render('web_sites', {to: 'main'});
+		});
 
-//	Router.route('/detail/:_id',function(){
-//		this.render()
-//	})
-
-        //configure user login ui
-        Accounts.ui.config({passwordSignupFields: 'USERNAME_AND_EMAIL'});
+	Router.route('/detail/:_id',function(){
+		this.render('navigator', {to: 'nav'});
+		this.render('one_website',
+		{	to: 'main',
+			data:function(){ return Websites.findOne({_id:this.params._id});}})
+	});
 
 	/////
 	// template helpers 
@@ -24,6 +33,8 @@ if (Meteor.isClient) {
 		}
 	});
 
+    //configure user login ui
+    Accounts.ui.config({passwordSignupFields: 'USERNAME_AND_EMAIL'});
 
 	/////
 	// template events 
@@ -39,7 +50,7 @@ if (Meteor.isClient) {
 			var newvote = 1 + Websites.findOne({_id:website_id}).upvote;
 			var newtotal = 1 + Websites.findOne({_id:website_id}).total;
 
-                        console.log(newtotal);
+            console.log(newtotal);
 			if(Meteor.user()){
 				Websites.update({_id:website_id},{$set:{upvote:newvote}});
 				Websites.update({_id:website_id},{$set:{total:newtotal}});
@@ -68,8 +79,20 @@ if (Meteor.isClient) {
 				alert("To Vote, You need to login first!");
 			return false;// prevent the button from reloading the page
 		}
-	})
+	});
 
+	Template.one_website.events({
+		"submit .js-add-comments":function(event){
+			if(Meteor.user()){
+				alert(event.target.website_id.value);
+//				Website.insert({website:
+	//							comments: event.target.comments.value,
+		//						commentBy: Meteor.user()._id,
+			//					commentOn: new Date()});
+			}
+		}
+	});
+	
 	Template.website_form.events({
 		"click .js-toggle-website-form":function(event){
 			$("#website_form").toggle('slow');
