@@ -1,0 +1,11 @@
+/* CSS declarations go here */
+.hidden_div{
+	display:none;
+}
+.uparrow{
+	color:green;
+}
+
+.downarrow{
+	color:red;
+}
