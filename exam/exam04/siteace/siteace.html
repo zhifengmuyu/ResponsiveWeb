@@ -90,12 +90,17 @@
 	<h1>{{title}}</h1>
 	<sub>{{description}}</sub>
 	<br>
+	{{#each comments}}
+	<div class = "row">
+		<div class="col-md-7 coment_content">{{comment}}</div><div class="col-md-2">{{commentBy}}</div><div class="col-md-3">{{commentOn}}</div>
+	</div>
+	{{/each}}
 	<div id="comment_form">
 		<form class="js-add-comments">
 		    <div class="form-group">
 		    <label for="description">Add your comments about this site</label>
-		    <input type="text" class="form-control" id="comments" placeholder="I found this site really useful for ...">
-			<input class="form-control" id="website_id" type="hidden" value = {{_id}} />
+		    <input type="text" class="form-control" id="comment" placeholder="I found this site really useful for ...">
+	            <input class="form-control" id="website_id" type="hidden" value = {{website_id}} />
 		  </div>
 		  <button type="submit" class="btn btn-default">Submit</button>
 		</form>

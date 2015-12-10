@@ -16,11 +16,19 @@ if (Meteor.isClient) {
 		this.render('navigator', {to: 'nav'});
 		this.render('one_website',
 		{	to: 'main',
-			data:function(){ return Websites.findOne({_id:this.params._id});}})
+			data: function(){ 
+                                                  return {title: Websites.findOne({_id:this.params._id}).title,
+                                                  description: Websites.findOne({_id:this.params._id}).description,
+                                                  website_id: this.params._id,
+                                                  comments: Comments.find({website: this.params._id})
+                                                 };
+                                        }
+                }          )
 	});
 
 	/////
 	// template helpers 
+//                                                  description: Websites:findOne({_id:this.params._id}),
 	/////
 
 	// helper function that returns all available websites
@@ -32,6 +40,7 @@ if (Meteor.isClient) {
 
 		}
 	});
+       
 
     //configure user login ui
     Accounts.ui.config({passwordSignupFields: 'USERNAME_AND_EMAIL'});
@@ -50,7 +59,6 @@ if (Meteor.isClient) {
 			var newvote = 1 + Websites.findOne({_id:website_id}).upvote;
 			var newtotal = 1 + Websites.findOne({_id:website_id}).total;
 
-            console.log(newtotal);
 			if(Meteor.user()){
 				Websites.update({_id:website_id},{$set:{upvote:newvote}});
 				Websites.update({_id:website_id},{$set:{total:newtotal}});
@@ -83,13 +91,15 @@ if (Meteor.isClient) {
 
 	Template.one_website.events({
 		"submit .js-add-comments":function(event){
+				console.log(Comments);
 			if(Meteor.user()){
-				alert(event.target.website_id.value);
-//				Website.insert({website:
-	//							comments: event.target.comments.value,
-		//						commentBy: Meteor.user()._id,
-			//					commentOn: new Date()});
+				Comments.insert({website: event.target.website_id.value,
+						comment: event.target.comment.value,
+						commentBy: Meteor.user().username,
+						commentOn: new Date()});
+				console.log("this is " + event.target.website_id.value);
 			}
+			return false;
 		}
 	});
 	
