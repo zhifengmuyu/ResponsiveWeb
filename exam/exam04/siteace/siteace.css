@@ -9,3 +9,12 @@
 .downarrow{
 	color:red;
 }
+.row-style-1{
+	background: #F0F8FF;
+}
+.row-style-2{
+	background: white;
+}
+.box-style{
+	border:1.5px solid grey;
+}

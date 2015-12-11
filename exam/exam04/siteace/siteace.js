@@ -38,6 +38,12 @@ if (Meteor.isClient) {
 
 			//return Websites.aggregate(    [        $project: {            sum: { $add: [ "$upvote", "$downvote"] }        },        $sort: {            sum: -1        }    ]);
 
+		},
+		isEven:function(index){
+			if(index%2 == 0)
+				return true;
+			else
+				return false;
 		}
 	});
        
@@ -105,7 +111,7 @@ if (Meteor.isClient) {
 	
 	Template.website_form.events({
 		"click .js-toggle-website-form":function(event){
-			$("#website_form").toggle('slow');
+			$("#website_form").modal('show');
 		}, 
 		"submit .js-save-website-form":function(event){
 
@@ -131,7 +137,7 @@ if (Meteor.isClient) {
 				total:Number(0)
         	                })
 			}
-
+			$("#website_form").modal('hide');
 			return false;// stop the form submit from reloading the page
 
 		}
