@@ -28,16 +28,31 @@
   <br/>
 	<div class="container">
 		{{#if currentUser}}
-			{{> website_form}}
+			{{> website_form}} 
 		{{/if}}
 		{{> website_list}}
 	</div>
 </template>
 
 <template name="website_form">
-	<a class="btn btn-default js-toggle-website-form" href="#">
-		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-	</a>
+	<div class="row">
+		<div class="col-md-1">
+			<a class="btn btn-default js-toggle-website-form" href="#">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+			</a>
+		</div>
+		<div class="col-md-9">
+		</div>
+		<form class="js-search-website">
+			<div class="col-md-2">
+				<table class="table">
+					<tr>
+						<td>		<input id="keyword" type="text" placeholder="key word to search"><button type="submit" class="btn btn-info">find</button></td>
+					</tr>
+				</table>
+			</div>
+		</form>
+	</div>
 	<div id="website_form" class="hidden_div modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -56,11 +71,6 @@
 					    <label for="title">Title</label>
 					    <input type="text" class="form-control" id="title" placeholder="Mysite">
 					  </div>
-					    <div class="form-group">
-					    <label for="description">Description</label>
-					    <input type="text" class="form-control" id="description" placeholder="I found this site really useful for ...">
-					  </div>
-
 					  <button type="submit" class="btn btn-success">Add</button>
 					</form>
 				</div>
@@ -112,14 +122,26 @@
 
 <template name = "one_website">
 <div class="container">
-	<h1>{{title}}</h1>
-	<sub>{{description}}</sub>
+	<div class="well">
+		<h1>{{title}}</h1>
+		<small>{{description}}</small>
 	<br>
-	{{#each comments}}
-	<div class = "row">
-		<div class="col-md-7 coment_content">{{comment}}</div><div class="col-md-2">{{commentBy}}</div><div class="col-md-3">{{commentOn}}</div>
 	</div>
+	<table class="table table-striped">
+	<tbody>
+	{{#each comments}}
+	<tr>
+		<td><div class="col-md-7 coment_content">{{comment}}
+		<div>{{commentOn}}</div>
+		</div>
+		</td>
+		<td>
+		<div class="col-md-2">{{commentBy}}</div>
+		</td>
+	</tr>
 	{{/each}}
+	</tbody>
+	</table>
 	<div id="comment_form">
 		<form class="js-add-comments">
 		    <div class="form-group">
@@ -131,5 +153,30 @@
 		</form>
 	</div>
 
+</div>
+</template>
+
+<template name = "search_result">
+<div class="container">
+	<div class="well">
+		<h1>Search result</h1>
+		<small>All website that have key words {{keys}}</small>
+	<br>
+	</div>
+	<table class="table table-striped">
+	<tbody>
+	{{#each search_results}}
+	<tr>
+		<td><div class="col-md-7 coment_content">{{title}}
+		<div>{{description}}</div>
+		</div>
+		</td>
+		<td>
+		<div class="col-md-2">{{createdBy}}</div>
+		</td>
+	</tr>
+	{{/each}}
+	</tbody>
+	</table>
 </div>
 </template>

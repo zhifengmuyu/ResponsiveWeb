@@ -2,12 +2,12 @@ Websites = new Mongo.Collection("websites");
 Comments = new Mongo.Collection("comments");
 
 if (Meteor.isClient) {
-
 	Router.configure({
 		layoutTemplate: 'AppLayout'
 	});
 	
 	Router.route('/',function(){
+        console.log("test");
 		this.render('navigator', {to: 'nav'});
 		this.render('web_sites', {to: 'main'});
 		});
@@ -17,12 +17,12 @@ if (Meteor.isClient) {
 		this.render('one_website',
 		{	to: 'main',
 			data: function(){ 
-                                                  return {title: Websites.findOne({_id:this.params._id}).title,
-                                                  description: Websites.findOne({_id:this.params._id}).description,
-                                                  website_id: this.params._id,
-                                                  comments: Comments.find({website: this.params._id})
-                                                 };
-                                        }
+										return {title: Websites.findOne({_id:this.params._id}).title,
+										  description: Websites.findOne({_id:this.params._id}).description,
+										  website_id: this.params._id,
+										  comments: Comments.find({website: this.params._id})
+										 };
+                                    }
                 }          )
 	});
 
@@ -35,9 +35,6 @@ if (Meteor.isClient) {
 	Template.website_list.helpers({
 		websites:function(){
 			return Websites.find({},{sort:{total:-1, createdOn:-1}});
-
-			//return Websites.aggregate(    [        $project: {            sum: { $add: [ "$upvote", "$downvote"] }        },        $sort: {            sum: -1        }    ]);
-
 		},
 		isEven:function(index){
 			if(index%2 == 0)
@@ -47,14 +44,24 @@ if (Meteor.isClient) {
 		}
 	});
        
-
     //configure user login ui
     Accounts.ui.config({passwordSignupFields: 'USERNAME_AND_EMAIL'});
 
 	/////
 	// template events 
 	/////
+	Template.web_sites.events({
+		"submit .js-search-website":function(event){
+			var keys = event.target.keyword.value;
 
+			alert(keys);
+			var res = Websites.find({$or:[{title: new RegExp(keys,"i")}, {description: new RegExp(keys, "i")}]});
+			
+		    console.log(res.count());
+			return false;
+		}
+	});
+	
 	Template.website_item.events({
 		"click .js-upvote":function(event){
 			// example of how you can access the id for the website in the database
@@ -84,7 +91,7 @@ if (Meteor.isClient) {
 			var newvote = 1 + Websites.findOne({_id:website_id}).downvote;
 			var newtotal = - 1 + Websites.findOne({_id:website_id}).total;
 
-                        console.log(newtotal);
+            console.log(newtotal);
 			if(Meteor.user()){
 				Websites.update({_id:website_id},{$set:{downvote:newvote}});
 				Websites.update({_id:website_id},{$set:{total:newtotal}});
@@ -117,26 +124,26 @@ if (Meteor.isClient) {
 
 			// here is an example of how to get the url out of the form:
 			var url = event.target.url.value;
-			console.log("The url they entered is: "+url);
-			
-			//  put your website saving code in here!
-			var url = event.target.url.value;
-			var title = event.target.title.value;
-			var desc = event.target.description.value;
-			var user = Meteor.user()._id;
-
-			if(Meteor.user()) {
-				Websites.insert({
-				title:title,
-				url:url,
-				description:desc,
-				createdOn:new Date(),
-				createdBy:user,
-				upvote:Number(0),
-				downvote:Number(0),
-				total:Number(0)
-        	                })
-			}
+			Meteor.call('getWebDetail', url, function(error,result){
+					//  put your website saving code in here!
+					var url = event.target.url.value;
+					var title = event.target.title.value;
+					var desc = result;
+					var user = Meteor.user()._id;
+					//console.log(result);
+					if(Meteor.user()) {
+						Websites.insert({
+						title:title,
+						url:url,
+						description:desc,
+						createdOn:new Date(),
+						createdBy:user,
+						upvote:Number(0),
+						downvote:Number(0),
+						total:Number(0)
+									})
+					}
+				});
 			$("#website_form").modal('hide');
 			return false;// stop the form submit from reloading the page
 
@@ -191,9 +198,20 @@ if (Meteor.isServer) {
     }
   });
 
-//test
-//  	var result = HTTP.get("http://www.baidu.com",{headers:{Access-Control-Allow-Origin: "http://www.baidu.com"}},function(error, result){
-//		/if(!error)  console.log(result.content);
-//        });
+  
+  Meteor.methods({
+  getWebDetail: function (url) {
+	var result = HTTP.get(url);
+	if (result.statusCode < 300 || result.statusCode == 304){
+		var title = result.content.split(/<title>|<\/title>/);
+		console.log(title[1]);
+		return title[1];//result.content;
+	}
+	else
+	    return "No Description";
+
+
+  },
+});
 
 }
