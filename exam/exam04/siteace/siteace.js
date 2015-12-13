@@ -34,7 +34,12 @@ if (Meteor.isClient) {
 	// helper function that returns all available websites
 	Template.website_list.helpers({
 		websites:function(){
-			return Websites.find({},{sort:{total:-1, createdOn:-1}});
+			if(Session.get("keys")){
+				var keys = Session.get("keys");
+				return Websites.find({$or:[{title: new RegExp(keys,"i")}, {description: new RegExp(keys, "i")}]});
+			}else{
+				return Websites.find({},{sort:{total:-1, createdOn:-1}});
+			}
 		},
 		isEven:function(index){
 			if(index%2 == 0)
@@ -53,11 +58,11 @@ if (Meteor.isClient) {
 	Template.web_sites.events({
 		"submit .js-search-website":function(event){
 			var keys = event.target.keyword.value;
-
-			alert(keys);
-			var res = Websites.find({$or:[{title: new RegExp(keys,"i")}, {description: new RegExp(keys, "i")}]});
+			Session.set("keys", keys);
+//			alert(keys);
+	//		var res = Websites.find({$or:[{title: new RegExp(keys,"i")}, {description: new RegExp(keys, "i")}]});
 			
-		    console.log(res.count());
+//		    console.log(res.count());
 			return false;
 		}
 	});
