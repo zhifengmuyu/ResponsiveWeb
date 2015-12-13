@@ -9,6 +9,13 @@ Websites.allow({
 				return true;
 		}
 		return false;
+	},
+	update:function(userId, doc){
+		if(Meteor.user())
+		{
+				return true;
+		}
+		return false;
 	}
 })
 
@@ -16,7 +23,7 @@ Comments.allow({
 	insert:function(userId, doc){
 		if(Meteor.user())
 		{
-			if(doc.createdBy === userId)
+			if(doc.commentBy === Meteor.user().username)
 				return true;
 		}
 		return false;

@@ -21,3 +21,11 @@
 #search-button:hover{
 	mouse:pointer;
 }
+
+.sub-title{
+	text-align:center;
+}
+
+body{
+	margin-top:70px;
+}

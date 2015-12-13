@@ -2,7 +2,7 @@
   Meteor.startup(function () {
     // code to run on server at startup
     if (!Websites.findOne()){
-    	console.log("No websites yet. Creating starter data.");
+    	// console.log("No websites yet. Creating starter data.");
     	  Websites.insert({
     		title:"Goldsmiths Computing Department", 
     		url:"http://www.gold.ac.uk/computing/", 
@@ -49,7 +49,7 @@
 	var result = HTTP.get(url);
 	if (result.statusCode < 300 || result.statusCode == 304){
 		var title = result.content.split(/<title>|<\/title>/);
-		console.log(title[1]);
+		// console.log(title[1]);
 		return title[1];//result.content;
 	}
 	else

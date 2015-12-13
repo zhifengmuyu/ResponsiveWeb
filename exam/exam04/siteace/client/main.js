@@ -3,7 +3,7 @@
 	});
 	
 	Router.route('/',function(){
-        console.log("test");
+        // console.log("test");
 		this.render('navigator', {to: 'nav'});
 		this.render('web_sites', {to: 'main'});
 		});
@@ -68,7 +68,7 @@
 			// example of how you can access the id for the website in the database
 			// (this is the data context for the template)
 			var website_id = this._id;
-			console.log("Up voting website with id "+website_id);
+			// console.log("Up voting website with id "+website_id);
 			// put the code in here to add a vote to a website!
 			var newvote = 1 + Websites.findOne({_id:website_id}).upvote;
 			var newtotal = 1 + Websites.findOne({_id:website_id}).total;
@@ -86,13 +86,13 @@
 			// example of how you can access the id for the website in the database
 			// (this is the data context for the template)
 			var website_id = this._id;
-			console.log("Down voting website with id "+website_id);
+			// console.log("Down voting website with id "+website_id);
 
 			// put the code in here to remove a vote from a website!
 			var newvote = 1 + Websites.findOne({_id:website_id}).downvote;
 			var newtotal = - 1 + Websites.findOne({_id:website_id}).total;
 
-            console.log(newtotal);
+            // console.log(newtotal);
 			if(Meteor.user()){
 				Websites.update({_id:website_id},{$set:{downvote:newvote}});
 				Websites.update({_id:website_id},{$set:{total:newtotal}});
@@ -105,13 +105,13 @@
 
 	Template.one_website.events({
 		"submit .js-add-comments":function(event){
-				console.log(Comments);
+				// console.log(Comments);
 			if(Meteor.user()){
 				Comments.insert({website: event.target.website_id.value,
 						comment: event.target.comment.value,
 						commentBy: Meteor.user().username,
 						commentOn: new Date()});
-				console.log("this is " + event.target.website_id.value);
+				// console.log("this is " + event.target.website_id.value);
 			}
 			return false;
 		}
