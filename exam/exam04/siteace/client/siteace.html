@@ -25,6 +25,7 @@
 
 <template name = "web_sites">
    <h2 class="text-center">Site Ace</h2>
+   <small>The webistes is list in order per their score of (voteup count minor votedown count) </small>
   <br/>
 	<div class="container">
 		{{#if currentUser}}
@@ -68,8 +69,8 @@
 					    <input type="text" class="form-control" id="url" placeholder="http://www.mysite.com">
 					  </div>
 					  <div class="form-group">
-					    <label for="title">Title</label>
-					    <input type="text" class="form-control" id="title" placeholder="Mysite">
+					    <label for="desc">Desciption</label>
+					    <input type="text" class="form-control" id="desc" placeholder="The website is for...">
 					  </div>
 					  <button type="submit" class="btn btn-success">Add</button>
 					</form>
@@ -153,30 +154,5 @@
 		</form>
 	</div>
 
-</div>
-</template>
-
-<template name = "search_result">
-<div class="container">
-	<div class="well">
-		<h1>Search result</h1>
-		<small>All website that have key words {{keys}}</small>
-	<br>
-	</div>
-	<table class="table table-striped">
-	<tbody>
-	{{#each search_results}}
-	<tr>
-		<td><div class="col-md-7 coment_content">{{title}}
-		<div>{{description}}</div>
-		</div>
-		</td>
-		<td>
-		<div class="col-md-2">{{createdBy}}</div>
-		</td>
-	</tr>
-	{{/each}}
-	</tbody>
-	</table>
 </div>
 </template>

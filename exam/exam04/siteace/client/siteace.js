@@ -1,7 +1,3 @@
-Websites = new Mongo.Collection("websites");
-Comments = new Mongo.Collection("comments");
-
-if (Meteor.isClient) {
 	Router.configure({
 		layoutTemplate: 'AppLayout'
 	});
@@ -36,7 +32,7 @@ if (Meteor.isClient) {
 		websites:function(){
 			if(Session.get("keys")){
 				var keys = Session.get("keys");
-				return Websites.find({$or:[{title: new RegExp(keys,"i")}, {description: new RegExp(keys, "i")}]});
+				return Websites.find({$or:[{title: new RegExp(keys,"i")}, {description: new RegExp(keys, "i")}, {url: new RegExp(keys, "i")}]});
 			}else{
 				return Websites.find({},{sort:{total:-1, createdOn:-1}});
 			}
@@ -132,8 +128,12 @@ if (Meteor.isClient) {
 			Meteor.call('getWebDetail', url, function(error,result){
 					//  put your website saving code in here!
 					var url = event.target.url.value;
-					var title = event.target.title.value;
-					var desc = result;
+					if(/^http/i.test(url) === false ){
+						alert("no http prefix URL string, plz add http!");
+						return false;
+					}
+					var title = result;
+					var desc = event.target.desc.value;
 					var user = Meteor.user()._id;
 					//console.log(result);
 					if(Meteor.user()) {
@@ -154,69 +154,3 @@ if (Meteor.isClient) {
 
 		}
 	});
-}
-
-
-if (Meteor.isServer) {
-	// start up function that creates entries in the Websites databases.
-  Meteor.startup(function () {
-    // code to run on server at startup
-    if (!Websites.findOne()){
-    	console.log("No websites yet. Creating starter data.");
-    	  Websites.insert({
-    		title:"Goldsmiths Computing Department", 
-    		url:"http://www.gold.ac.uk/computing/", 
-    		description:"This is where this course was developed.", 
-    		createdOn:new Date(),
-		upvote:Number(0),
-		downvote:Number(0),
-		total:Number(0)
-    	});
-    	 Websites.insert({
-    		title:"University of London", 
-    		url:"http://www.londoninternational.ac.uk/courses/undergraduate/goldsmiths/bsc-creative-computing-bsc-diploma-work-entry-route", 
-    		description:"University of London International Programme.", 
-    		createdOn:new Date(),
-		upvote:Number(0),
-		downvote:Number(0),
-		total:Number(0)
-    	});
-    	 Websites.insert({
-    		title:"Coursera", 
-    		url:"http://www.coursera.org", 
-    		description:"Universal access to the world’s best education.", 
-    		createdOn:new Date(),
-		upvote:Number(0),
-		downvote:Number(0),
-		total:Number(0)
-    	});
-    	Websites.insert({
-    		title:"Google", 
-    		url:"http://www.google.com", 
-    		description:"Popular search engine.", 
-    		createdOn:new Date(),
-		upvote:Number(0),
-		downvote:Number(0),
-		total:Number(0)
-
-    	});
-    }
-  });
-
-  
-  Meteor.methods({
-  getWebDetail: function (url) {
-	var result = HTTP.get(url);
-	if (result.statusCode < 300 || result.statusCode == 304){
-		var title = result.content.split(/<title>|<\/title>/);
-		console.log(title[1]);
-		return title[1];//result.content;
-	}
-	else
-	    return "No Description";
-
-
-  },
-});
-
-}

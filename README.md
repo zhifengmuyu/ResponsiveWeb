@@ -1,2 +1,0 @@
-# ResponsiveWeb
-Responsive Web
